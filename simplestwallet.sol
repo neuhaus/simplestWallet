@@ -3,13 +3,18 @@ pragma solidity 0.4.18;
 contract SimplestWallet {
     
     // hardcode addresses and threshold at time of deployment.
-    address[] constant public owners = [ 0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead, 0xcafecafecafecafecafecafecafecafecafecafe, 0xbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef];
+    address[] constant public owners = [ 
+        0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead, 
+        0xcafecafecafecafecafecafecafecafecafecafe, 
+        0xbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef ];
     uint8 constant public threshold = 2;
     uint256 public nonce;
     
     function execute(uint8[] sigV, bytes32[] sigR, bytes32[] sigS, address destination, uint value, bytes data) public {
 
-        require(sigV.length == owners.length && sigR.length == owners.length && sigS.length == owners.length);
+        require(sigV.length == owners.length &&
+                sigR.length == owners.length &&
+                sigS.length == owners.length);
         uint8 recovered;
         
         // Follows ERC191 signature scheme: https://github.com/ethereum/EIPs/issues/191
